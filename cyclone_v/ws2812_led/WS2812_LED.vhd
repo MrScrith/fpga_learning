@@ -68,7 +68,7 @@ begin
 	begin
 	
 		if (rising_edge(clk)) then
-			if (reset = '1') then
+			if (reset = '0') then
 				bit_counter <= (others => '0');
 				color_counter <= (others => '0');
 				block_cycle <= rest;
@@ -168,6 +168,16 @@ begin
 						   -- sequence on to next color
 							color_counter <= color_counter - 1;
 							current_color(22 downto 0) <= current_color(23 downto 1);
+
+							if ( current_color(0) = '0') then
+								bit_cycle <= zero_high;
+								bit_counter <= ZERO_HIGH_COUNT;
+								stat_1 <= '0';
+							else
+							   stat_1 <= '1';
+								bit_cycle <= one_high;
+								bit_counter <= ONE_HIGH_COUNT;
+							end if;
 						end if;
 					end if;
 				else
