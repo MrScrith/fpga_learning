@@ -85,6 +85,7 @@ begin
 						bit_cycle <= one_low;
 						bit_counter <= ONE_LOW_COUNT;
 					else
+					   -- bit_cycle is either zero_low, one_low or rest_low, which means
 						-- we need to step to the next part.
 						if (color_counter = 0) then
 						   stat_2 <= not stat_2;
@@ -151,10 +152,7 @@ begin
 				else
 					bit_counter <= bit_counter - 1;
 				end if;
-			
-			
 			end if;
-			
 			-- Now that we know what to output, set output.
 			if ((bit_cycle = zero_high) or (bit_cycle = one_high)) then
 				dout <= '1';
